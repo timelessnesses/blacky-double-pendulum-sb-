@@ -41,14 +41,14 @@ namespace StorybrewScripts
                 var hSprite = hitobjectLayer.CreateSprite(SpritePath, OsbOrigin.Centre, hitobject.Position);
                 hSprite.ScaleVec(hitobject.StartTime, new OpenTK.Vector2((int)SpriteScale, 600000000));
                 hSprite.Fade(OsbEasing.OutBounce, hitobject.StartTime, hitobject.StartTime+FadeDuration, 0, 1);
-                hSprite.Scale(OsbEasing.In, hitobject.EndTime, hitobject.EndTime + FadeDuration, SpriteScale, 0);
+                hSprite.ScaleVec(OsbEasing.In, hitobject.EndTime, hitobject.EndTime + FadeDuration, new OpenTK.Vector2((int)SpriteScale, 600000000), new OpenTK.Vector2(0, 600000000));
                 hSprite.Fade(OsbEasing.In, hitobject.EndTime, hitobject.EndTime + FadeDuration, 1, 0);
                 hSprite.Additive(hitobject.StartTime, hitobject.EndTime + FadeDuration);
                 hSprite.Color(hitobject.StartTime, hitobject.Color);
 
                 if (hitobject is OsuSlider)
                 {
-                    var timestep = Beatmap.GetTimingPointAt((int)hitobject.StartTime).BeatDuration / BeatDivisor;
+                    var timestep = Beatmap.GetTimingPointAt((int)hitobject.StartTime).BeatDuration / 128;
                     var startTime = hitobject.StartTime;
                     while (true)
                     {
@@ -58,7 +58,7 @@ namespace StorybrewScripts
                         if (complete) endTime = hitobject.EndTime;
 
                         var startPosition = hSprite.PositionAt(startTime);
-                        hSprite.MoveX(startTime, endTime, startPosition.X, hitobject.PositionAtTime(endTime).X);
+                        hSprite.Move(startTime, endTime, startPosition, hitobject.PositionAtTime(endTime));
 
                         if (complete) break;
                         startTime += timestep;
