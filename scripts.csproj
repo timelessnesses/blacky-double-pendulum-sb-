@@ -53,6 +53,7 @@
   -->
   <ItemGroup>
     <Compile Include="Background.cs" />
+    <Compile Include="Credit.cs" />
     <Compile Include="GlowOverlay.cs" />
     <Compile Include="LineOverlay.cs" />
     <Compile Include="Spectrum.cs" />
