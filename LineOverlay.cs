@@ -39,8 +39,8 @@ namespace StorybrewScripts
                     continue;
 
                 var hSprite = hitobjectLayer.CreateSprite(SpritePath, OsbOrigin.Centre, hitobject.Position);
-                hSprite.ScaleVec(hitobject.StartTime, new OpenTK.Vector2((int)SpriteScale, 600000000));
-                hSprite.Fade(OsbEasing.OutBounce, hitobject.StartTime, hitobject.StartTime+FadeDuration, 0, 1);
+                hSprite.ScaleVec(OsbEasing.InBounce,hitobject.StartTime,hitobject.StartTime+FadeDuration-200, new OpenTK.Vector2((int)SpriteScale, 600000000), new OpenTK.Vector2((int)SpriteScale, 600000000));
+                hSprite.Fade(OsbEasing.InBounce, hitobject.StartTime, hitobject.StartTime+FadeDuration, 0, 1);
                 hSprite.ScaleVec(OsbEasing.In, hitobject.EndTime, hitobject.EndTime + FadeDuration, new OpenTK.Vector2((int)SpriteScale, 600000000), new OpenTK.Vector2(0, 600000000));
                 hSprite.Fade(OsbEasing.In, hitobject.EndTime, hitobject.EndTime + FadeDuration, 1, 0);
                 hSprite.Additive(hitobject.StartTime, hitobject.EndTime + FadeDuration);
