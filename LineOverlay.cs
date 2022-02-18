@@ -39,8 +39,8 @@ namespace StorybrewScripts
                     continue;
 
                 var hSprite = hitobjectLayer.CreateSprite(SpritePath, OsbOrigin.Centre, hitobject.Position);
-                hSprite.ScaleVec(OsbEasing.InBounce,hitobject.StartTime,hitobject.StartTime+FadeDuration-200, new OpenTK.Vector2((int)SpriteScale, 600000000), new OpenTK.Vector2((int)SpriteScale, 600000000));
-                hSprite.Fade(OsbEasing.InBounce, hitobject.StartTime, hitobject.StartTime+FadeDuration, 0, 1);
+                hSprite.Fade(OsbEasing.InOutSine, hitobject.StartTime, hitobject.StartTime+100, 0, 1);
+                hSprite.ScaleVec(OsbEasing.In,hitobject.StartTime,hitobject.StartTime+FadeDuration, new OpenTK.Vector2((int)SpriteScale, (int)SpriteScale), new OpenTK.Vector2((int)SpriteScale, 600000000));
                 hSprite.ScaleVec(OsbEasing.In, hitobject.EndTime, hitobject.EndTime + FadeDuration, new OpenTK.Vector2((int)SpriteScale, 600000000), new OpenTK.Vector2(0, 600000000));
                 hSprite.Fade(OsbEasing.In, hitobject.EndTime, hitobject.EndTime + FadeDuration, 1, 0);
                 hSprite.Additive(hitobject.StartTime, hitobject.EndTime + FadeDuration);
@@ -48,6 +48,7 @@ namespace StorybrewScripts
 
                 if (hitobject is OsuSlider)
                 {
+                    hSprite.MoveX(OsbEasing.InOutSine, hitobject.EndTime+FadeDuration, hitobject.EndTime+(FadeDuration*2), hitobject.Position.X, hitobject.Position.X+Random(-2,2));
                     var timestep = Beatmap.GetTimingPointAt((int)hitobject.StartTime).BeatDuration / 128;
                     var startTime = hitobject.StartTime;
                     while (true)
@@ -58,7 +59,7 @@ namespace StorybrewScripts
                         if (complete) endTime = hitobject.EndTime;
 
                         var startPosition = hSprite.PositionAt(startTime);
-                        hSprite.Move(startTime, endTime, startPosition, hitobject.PositionAtTime(endTime));
+                        hSprite.MoveX(startTime, endTime, startPosition.X, hitobject.PositionAtTime(endTime).X);
 
                         if (complete) break;
                         startTime += timestep;

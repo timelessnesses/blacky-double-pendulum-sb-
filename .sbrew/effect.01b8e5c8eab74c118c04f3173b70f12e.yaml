@@ -13,7 +13,7 @@ Config:
     Value: "sb/line.png"
   SpriteScale:
     Type: "System.Double"
-    Value: "1.8"
+    Value: "1.9"
   RandomSeed:
     Type: "System.Int32"
     Value: "0"
