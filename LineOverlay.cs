@@ -39,16 +39,16 @@ namespace StorybrewScripts
                     continue;
 
                 var hSprite = hitobjectLayer.CreateSprite(SpritePath, OsbOrigin.Centre, hitobject.Position);
-                hSprite.ScaleVec(OsbEasing.InBounce,hitobject.StartTime-200,hitobject.StartTime+FadeDuration, new OpenTK.Vector2((int)SpriteScale, 600000000), new OpenTK.Vector2((int)SpriteScale, 600000000));
-                hSprite.Fade(OsbEasing.InBounce, hitobject.StartTime-100, hitobject.StartTime+FadeDuration, 0, 1);
-                hSprite.ScaleVec(OsbEasing.OutBounce, hitobject.EndTime, hitobject.EndTime + FadeDuration, new OpenTK.Vector2((int)SpriteScale, 600000000), new OpenTK.Vector2(0, 600000000));
-                hSprite.Fade(OsbEasing.OutBounce, hitobject.EndTime, hitobject.EndTime + FadeDuration, 1, 0);
+                hSprite.ScaleVec(OsbEasing.InBounce,hitobject.StartTime,hitobject.StartTime+FadeDuration-200, new OpenTK.Vector2((int)SpriteScale, 600000000), new OpenTK.Vector2((int)SpriteScale, 600000000));
+                hSprite.Fade(OsbEasing.InBounce, hitobject.StartTime, hitobject.StartTime+FadeDuration, 0, 1);
+                hSprite.ScaleVec(OsbEasing.In, hitobject.EndTime, hitobject.EndTime + FadeDuration, new OpenTK.Vector2((int)SpriteScale, 600000000), new OpenTK.Vector2(0, 600000000));
+                hSprite.Fade(OsbEasing.In, hitobject.EndTime, hitobject.EndTime + FadeDuration, 1, 0);
                 hSprite.Additive(hitobject.StartTime, hitobject.EndTime + FadeDuration);
                 hSprite.Color(hitobject.StartTime, hitobject.Color);
 
                 if (hitobject is OsuSlider)
                 {
-                    var timestep = Beatmap.GetTimingPointAt((int)hitobject.StartTime).BeatDuration / 1024;
+                    var timestep = Beatmap.GetTimingPointAt((int)hitobject.StartTime).BeatDuration / 2048;
                     var startTime = hitobject.StartTime;
                     while (true)
                     {
