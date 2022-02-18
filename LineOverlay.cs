@@ -48,7 +48,7 @@ namespace StorybrewScripts
 
                 if (hitobject is OsuSlider)
                 {
-                    var timestep = Beatmap.GetTimingPointAt((int)hitobject.StartTime).BeatDuration / 2048;
+                    var timestep = Beatmap.GetTimingPointAt((int)hitobject.StartTime).BeatDuration / 128;
                     var startTime = hitobject.StartTime;
                     while (true)
                     {
